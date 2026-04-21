@@ -12,6 +12,21 @@ namespace EstudioContableApp.ViewModels
         // esta coleccion es la que se muestra en la pantalla
         public ObservableCollection<Cliente> Clientes { get; set; } = new();
 
+        // cliente seleccionado en la lista
+        // cliente seleccionado en la lista
+        private Cliente _clienteSeleccionado;
+        public Cliente ClienteSeleccionado
+        {
+            get => _clienteSeleccionado;
+            set
+            {
+                if (SetProperty(ref _clienteSeleccionado, value) && value != null)
+                {
+                    IrADetalle(value);
+                }
+            }
+        }
+
         private string _mensaje = string.Empty;
 
         // este mensaje se usa para darle feedback al usuario (cargando, error, etc.)
@@ -62,6 +77,13 @@ namespace EstudioContableApp.ViewModels
                 // error generico
                 Mensaje = "Ocurrió un error inesperado";
             }
+        }
+
+        // cuando el usuario toca un cliente, navego a detalle
+        private async void IrADetalle(Cliente cliente)
+        {
+            await Shell.Current.GoToAsync(
+                $"detalle?nombre={cliente.Nombre}&email={cliente.Email}");
         }
     }
 }

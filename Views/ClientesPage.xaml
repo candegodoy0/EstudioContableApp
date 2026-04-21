@@ -18,7 +18,11 @@
             TextColor="Gray" />
 
         <!-- lista de clientes -->
-        <CollectionView ItemsSource="{Binding Clientes}">
+        <CollectionView 
+    ItemsSource="{Binding Clientes}"
+    SelectionMode="Single"
+    SelectedItem="{Binding ClienteSeleccionado}">
+            
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Stroke="LightGray" Padding="10" Margin="5">

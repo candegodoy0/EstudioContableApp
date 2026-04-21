@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EstudioContableApp.Views.DetalleClientePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <Label Text="Detalle del cliente"
+               FontSize="22"
+               FontAttributes="Bold" />
+
+        <Label Text="{Binding Nombre}" FontSize="18"/>
+        <Label Text="{Binding Email}" FontSize="14"/>
+
+    </VerticalStackLayout>
+
+</ContentPage>
