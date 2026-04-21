@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace EstudioContableApp
+﻿namespace EstudioContableApp
 {
     public partial class App : Application
     {

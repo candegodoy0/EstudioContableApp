@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="EstudioContableApp.Views.ClientesPage">
+
+    <VerticalStackLayout Padding="20" Spacing="15">
+
+        <!-- boton para consumir API -->
+        <Button 
+            Text="Cargar clientes"
+            Command="{Binding CargarClientesCommand}" />
+
+        <!-- mensaje de estado (errores / info) -->
+        <Label 
+            Text="{Binding Mensaje}" 
+            FontAttributes="Bold"
+            TextColor="Gray" />
+
+        <!-- lista de clientes -->
+        <CollectionView ItemsSource="{Binding Clientes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border Stroke="LightGray" Padding="10" Margin="5">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
+                            <Label Text="{Binding Email}" FontSize="12"/>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </VerticalStackLayout>
+
+</ContentPage>
