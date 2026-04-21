@@ -6,9 +6,18 @@
 
     <VerticalStackLayout Padding="20" Spacing="15">
 
+        <!-- titulo de la app -->
+        <Label 
+        Text="Estudio Contable - Gestión de Clientes"
+        FontSize="20"
+        FontAttributes="Bold"
+        HorizontalOptions="Center" />
+
         <!-- boton para consumir API -->
         <Button 
             Text="Cargar clientes"
+            BackgroundColor="#4CAF50"
+            TextColor="White"
             Command="{Binding CargarClientesCommand}" />
 
         <!-- mensaje de estado (errores / info) -->
@@ -29,6 +38,12 @@
                         <VerticalStackLayout>
                             <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
                             <Label Text="{Binding Email}" FontSize="12"/>
+                        
+                            <Label 
+                                Text="Cliente activo" 
+                                FontSize="10" 
+                                TextColor="Green"/>
+                            
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>

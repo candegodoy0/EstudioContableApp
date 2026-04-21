@@ -1,38 +1,20 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace EstudioContableApp.ViewModels
 {
-    [QueryProperty(nameof(Nombre), "nombre")]
-    [QueryProperty(nameof(Email), "email")]
-    public class DetalleClienteViewModel : INotifyPropertyChanged
+    [QueryProperty("Nombre", "nombre")]
+    [QueryProperty("Email", "email")]
+
+    // usamos ObservableObject del toolkit en lugar de INotifyPropertyChanged manual
+    public partial class DetalleClienteViewModel : ObservableObject
     {
-        private string _nombre;
-        public string Nombre
-        {
-            get => _nombre;
-            set
-            {
-                _nombre = value;
-                OnPropertyChanged();
-            }
-        }
+        [ObservableProperty]
+        private string nombre;
 
-        private string _email;
-        public string Email
-        {
-            get => _email;
-            set
-            {
-                _email = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged([CallerMemberName] string prop = null)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        [ObservableProperty]
+        private string email;
     }
 }

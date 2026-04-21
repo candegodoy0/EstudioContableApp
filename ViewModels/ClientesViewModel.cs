@@ -1,51 +1,40 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows.Input;
 using EstudioContableApp.Models;
 using EstudioContableApp.Services;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace EstudioContableApp.ViewModels
 {
-    public class ClientesViewModel : BaseViewModel
+    // se usa partial porque el toolkit genera codigo automaticamente por detras
+    public partial class ClientesViewModel : ObservableObject
     {
         private readonly ClienteService _service = new();
 
-        // esta coleccion es la que se muestra en la pantalla
+        // esta coleccion es la que se muestra en pantalla
         public ObservableCollection<Cliente> Clientes { get; set; } = new();
 
+        // mensaje para mostrarle al usuario (estado, errores, etc)
+        [ObservableProperty]
+        private string mensaje;
+
         // cliente seleccionado en la lista
-        // cliente seleccionado en la lista
-        private Cliente _clienteSeleccionado;
-        public Cliente ClienteSeleccionado
+        // cuando cambia, vamos a navegar al detalle amaticamente
+        [ObservableProperty]
+        private Cliente clienteSeleccionado;
+
+        // este metodo se ejecuta automaticamente cuando cambia clienteseleccionado
+        partial void OnClienteSeleccionadoChanged(Cliente value)
         {
-            get => _clienteSeleccionado;
-            set
+            if (value != null)
             {
-                if (SetProperty(ref _clienteSeleccionado, value) && value != null)
-                {
-                    IrADetalle(value);
-                }
+                IrADetalle(value);
             }
         }
 
-        private string _mensaje = string.Empty;
-
-        // este mensaje se usa para darle feedback al usuario (cargando, error, etc.)
-        public string Mensaje
-        {
-            get => _mensaje;
-            set => SetProperty(ref _mensaje, value);
-        }
-
-        // comando que se va a usar en el boton
-        public ICommand CargarClientesCommand { get; }
-
-        public ClientesViewModel()
-        {
-            // se vincula el boton con el metodo
-            CargarClientesCommand = new Command(async () => await CargarClientes());
-        }
-
-        // metodo que hace todo el proceso de traer los datos
+        // este comando reemplaza el iCommand manual
+        // el toolkit lo genera automaticamente como "cargarClientesCommand"
+        [RelayCommand]
         private async Task CargarClientes()
         {
             try
@@ -54,7 +43,6 @@ namespace EstudioContableApp.ViewModels
 
                 var lista = await _service.ObtenerClientesAsync();
 
-                // se limpia la lista antes de volver a cargar
                 Clientes.Clear();
 
                 foreach (var c in lista)
@@ -64,22 +52,22 @@ namespace EstudioContableApp.ViewModels
             }
             catch (HttpRequestException)
             {
-                // error tipico de conexion (sin internet)
+                // error: sin internet
                 Mensaje = "No se pudo conectar a internet";
             }
             catch (TaskCanceledException)
             {
-                // timeout o cancelacion
-                Mensaje = "La solicitud tardó demasiado, intentá nuevamente";
+                // timeout
+                Mensaje = "La solicitud tardó demasiado";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // error generico
-                Mensaje = "Ocurrió un error inesperado";
+                Mensaje = $"Error inesperado: {ex.Message}";
             }
         }
 
-        // cuando el usuario toca un cliente, navego a detalle
+        // navegacion al detalle pasando parametros por query
         private async void IrADetalle(Cliente cliente)
         {
             await Shell.Current.GoToAsync(
