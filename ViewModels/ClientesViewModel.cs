@@ -45,12 +45,22 @@ namespace EstudioContableApp.ViewModels
                 foreach (var c in lista)
                     Clientes.Add(c);
 
-                Mensaje = "Clientes cargados correctamente";
+                Mensaje = $"Se cargaron {Clientes.Count} clientes correctamente";
             }
-            catch (Exception ex)
+            catch (HttpRequestException)
             {
-                // si algo falla, muestra el error
-                Mensaje = ex.Message;
+                // error tipico de conexion (sin internet)
+                Mensaje = "No se pudo conectar a internet";
+            }
+            catch (TaskCanceledException)
+            {
+                // timeout o cancelacion
+                Mensaje = "La solicitud tardó demasiado, intentá nuevamente";
+            }
+            catch (Exception)
+            {
+                // error generico
+                Mensaje = "Ocurrió un error inesperado";
             }
         }
     }
