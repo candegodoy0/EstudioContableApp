@@ -38,7 +38,9 @@
                         <VerticalStackLayout>
                             <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
                             <Label Text="{Binding Email}" FontSize="12"/>
-                        
+                            <Label Text="{Binding Vencimiento}" FontSize="11" TextColor="Red"/>
+
+
                             <Label 
                                 Text="Cliente activo" 
                                 FontSize="10" 
