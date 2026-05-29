@@ -9,10 +9,13 @@ namespace EstudioContableApp.Repositories
         private readonly ClienteService _service;
         private readonly DatabaseService _database;
 
-        public ClienteRepository()
+        // recibimos las dependencias desde afuera
+        // esto evita crear los servicios manualmente con new
+
+        public ClienteRepository(ClienteService service, DatabaseService database)
         {
-            _service = new ClienteService();
-            _database = new DatabaseService();
+            _service = service;
+            _database = database;
         }
 
         public async Task<List<Cliente>> ObtenerClientesAsync()

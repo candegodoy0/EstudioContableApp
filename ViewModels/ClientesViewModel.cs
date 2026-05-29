@@ -10,7 +10,7 @@ namespace EstudioContableApp.ViewModels
     // se usa partial porque el toolkit genera codigo automaticamente por detras
     public partial class ClientesViewModel : ObservableObject
     {
-        private readonly IClienteRepository _repository = new ClienteRepository();
+        private readonly IClienteRepository _repository;
 
         // esta coleccion es la que se muestra en pantalla
         public ObservableCollection<Cliente> Clientes { get; set; } = new();
@@ -23,6 +23,12 @@ namespace EstudioContableApp.ViewModels
         // cuando cambia, vamos a navegar al detalle amaticamente
         [ObservableProperty]
         private Cliente clienteSeleccionado;
+
+        // recibimos el repositorio desde MauiProgram usando Dependency Injection
+        public ClientesViewModel(IClienteRepository repository)
+        {
+            _repository = repository;
+        }
 
         // este metodo se ejecuta automaticamente cuando cambia clienteseleccionado
         partial void OnClienteSeleccionadoChanged(Cliente value)

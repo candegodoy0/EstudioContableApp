@@ -4,10 +4,10 @@ namespace EstudioContableApp.Views;
 
 public partial class ClientesPage : ContentPage
 {
-    public ClientesPage()
+    public ClientesPage(ClientesViewModel viewModel)
     {
         InitializeComponent();
 
-        BindingContext = new ClientesViewModel();
+        BindingContext = viewModel;
     }
 }
