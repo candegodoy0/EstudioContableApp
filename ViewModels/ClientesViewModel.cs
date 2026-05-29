@@ -64,6 +64,27 @@ namespace EstudioContableApp.ViewModels
             }
         }
 
+        // elimina un cliente de la base local y de la lista visible
+        [RelayCommand]
+        private async Task EliminarCliente(Cliente cliente)
+        {
+            if (cliente == null)
+                return;
+
+            try
+            {
+                await _repository.EliminarClienteAsync(cliente);
+
+                Clientes.Remove(cliente);
+
+                Mensaje = $"Se eliminó el cliente {cliente.Nombre}";
+            }
+            catch (Exception ex)
+            {
+                Mensaje = $"Error al eliminar cliente: {ex.Message}";
+            }
+        }
+
         // navegacion al detalle pasando parametros por query
         private async void IrADetalle(Cliente cliente)
         {
