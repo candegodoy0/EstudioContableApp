@@ -1,7 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using EstudioContableApp.Models;
-using EstudioContableApp.Services;
-using EstudioContableApp.Data;
+using EstudioContableApp.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -11,8 +10,7 @@ namespace EstudioContableApp.ViewModels
     // se usa partial porque el toolkit genera codigo automaticamente por detras
     public partial class ClientesViewModel : ObservableObject
     {
-        private readonly ClienteService _service = new();
-        private readonly DatabaseService _database = new();
+        private readonly IClienteRepository _repository = new ClienteRepository();
 
         // esta coleccion es la que se muestra en pantalla
         public ObservableCollection<Cliente> Clientes { get; set; } = new();
@@ -42,41 +40,16 @@ namespace EstudioContableApp.ViewModels
         {
             try
             {
-                Mensaje = "Cargando clientes desde la API...";
+                Mensaje = "Cargando clientes...";
 
-                var lista = await _service.ObtenerClientesAsync();
-
-                // guardo los datos en SQLite para que queden disponibles localmente
-                await _database.GuardarClientesAsync(lista);
+                var lista = await _repository.ObtenerClientesAsync();
 
                 Clientes.Clear();
 
                 foreach (var c in lista)
                     Clientes.Add(c);
 
-                Mensaje = $"Se cargaron y guardaron {Clientes.Count} clientes correctamente";
-            }
-            catch (HttpRequestException)
-            {
-                // error: sin internet
-                Mensaje = "No se pudo conectar a internet";
-
-                // si no hay internet, intento mostrar los clientes guardados localmente
-                var clientesLocales = await _database.ObtenerClientesAsync();
-
-                Clientes.Clear();
-
-                foreach (var c in clientesLocales)
-                    Clientes.Add(c);
-
-                if (Clientes.Count > 0)
-                    Mensaje = $"Sin conexión. Se muestran {Clientes.Count} clientes guardados localmente";
-
-            }
-            catch (TaskCanceledException)
-            {
-                // timeout
-                Mensaje = "La solicitud tardó demasiado";
+                Mensaje = $"Se cargaron {Clientes.Count} clientes correctamente";
             }
             catch (Exception ex)
             {
