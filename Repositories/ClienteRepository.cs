@@ -36,5 +36,15 @@ namespace EstudioContableApp.Repositories
                 return await _database.ObtenerClientesAsync();
             }
         }
+
+        public async Task GuardarClienteAsync(Cliente cliente)
+        {
+            await _database.GuardarClienteAsync(cliente);
+        }
+
+        public async Task EliminarClienteAsync(Cliente cliente)
+        {
+            await _database.EliminarClienteAsync(cliente);
+        }
     }
 }
