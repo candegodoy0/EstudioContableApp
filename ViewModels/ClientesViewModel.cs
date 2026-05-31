@@ -17,19 +17,19 @@ namespace EstudioContableApp.ViewModels
 
         // mensaje para mostrarle al usuario (estado, errores, etc)
         [ObservableProperty]
-        private string mensaje;
+        private string mensaje = string.Empty;
 
         // datos del nuevo cliente
         [ObservableProperty]
-        private string nuevoNombre;
+        private string nuevoNombre = string.Empty;
 
         [ObservableProperty]
-        private string nuevoEmail;
+        private string nuevoEmail = string.Empty;
 
         // cliente seleccionado en la lista
         // cuando cambia, cargamos sus datos en el formulario para editar
         [ObservableProperty]
-        private Cliente clienteSeleccionado;
+        private Cliente? clienteSeleccionado;
 
         // recibimos el repositorio desde MauiProgram usando Dependency Injection
         public ClientesViewModel(IClienteRepository repository)
@@ -38,7 +38,7 @@ namespace EstudioContableApp.ViewModels
         }
 
         // este metodo se ejecuta automaticamente cuando cambia clienteseleccionado
-        partial void OnClienteSeleccionadoChanged(Cliente value)
+        partial void OnClienteSeleccionadoChanged(Cliente? value)
         {
             if (value != null)
             {

@@ -5,7 +5,7 @@ namespace EstudioContableApp.Data
 {
     public class DatabaseService
     {
-        private SQLiteAsyncConnection _database;
+        private SQLiteAsyncConnection? _database;
 
         public async Task InitAsync()
         {
@@ -28,7 +28,7 @@ namespace EstudioContableApp.Data
 
             foreach (var cliente in clientes)
             {
-                await _database.InsertOrReplaceAsync(cliente);
+                await _database!.InsertOrReplaceAsync(cliente);
             }
         }
 
@@ -37,14 +37,14 @@ namespace EstudioContableApp.Data
         {
             await InitAsync();
 
-            return await _database.Table<Cliente>().ToListAsync();
+            return await _database!.Table<Cliente>().ToListAsync();
         }
         // guarda o actualiza un cliente individual
         public async Task GuardarClienteAsync(Cliente cliente)
         {
             await InitAsync();
 
-            await _database.InsertOrReplaceAsync(cliente);
+            await _database!.InsertOrReplaceAsync(cliente);
         }
 
         // elimina un cliente de la base local
@@ -52,7 +52,7 @@ namespace EstudioContableApp.Data
         {
             await InitAsync();
 
-            await _database.DeleteAsync(cliente);
+            await _database!.DeleteAsync(cliente);
         }
     }
 }

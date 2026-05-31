@@ -12,9 +12,9 @@ namespace EstudioContableApp.ViewModels
     public partial class DetalleClienteViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string nombre;
+        private string nombre = string.Empty;
 
         [ObservableProperty]
-        private string email;
+        private string email = string.Empty;
     }
 }
