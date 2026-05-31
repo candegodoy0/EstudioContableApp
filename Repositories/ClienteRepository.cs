@@ -28,13 +28,22 @@ namespace EstudioContableApp.Repositories
                 // los guardo localmente
                 await _database.GuardarClientesAsync(clientes);
 
-                return clientes;
+                return await _database.ObtenerClientesAsync();
             }
             catch
             {
                 // si falla internet, uso los datos locales
                 return await _database.ObtenerClientesAsync();
             }
+        }
+        public async Task GuardarClienteAsync(Cliente cliente)
+        {
+            await _database.GuardarClienteAsync(cliente);
+        }
+
+        public async Task EliminarClienteAsync(Cliente cliente)
+        {
+            await _database.EliminarClienteAsync(cliente);
         }
     }
 }

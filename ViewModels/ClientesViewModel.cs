@@ -19,6 +19,13 @@ namespace EstudioContableApp.ViewModels
         [ObservableProperty]
         private string mensaje;
 
+        // datos del nuevo cliente
+        [ObservableProperty]
+        private string nuevoNombre;
+
+        [ObservableProperty]
+        private string nuevoEmail;
+
         // cliente seleccionado en la lista
         // cuando cambia, vamos a navegar al detalle amaticamente
         [ObservableProperty]
@@ -61,6 +68,63 @@ namespace EstudioContableApp.ViewModels
             {
                 // error generico
                 Mensaje = $"Error inesperado: {ex.Message}";
+            }
+        }
+
+        [RelayCommand]
+        private async Task GuardarCliente()
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(NuevoNombre) ||
+                    string.IsNullOrWhiteSpace(NuevoEmail))
+                {
+                    Mensaje = "Debe completar nombre y email";
+                    return;
+                }
+
+                var cliente = new Cliente
+                {
+                    Nombre = NuevoNombre,
+                    Email = NuevoEmail,
+                    Vencimiento = "IVA - 20/05"
+                };
+
+                await _repository.GuardarClienteAsync(cliente);
+
+                Clientes.Add(cliente);
+
+                NuevoNombre = string.Empty;
+                NuevoEmail = string.Empty;
+
+                Mensaje = $"Cliente {cliente.Nombre} agregado correctamente";
+            }
+            catch (Exception ex)
+            {
+                Mensaje = $"Error al guardar cliente: {ex.Message}";
+            }
+        }
+
+        // elimina un cliente de la base local y de la lista visible
+        [RelayCommand]
+        private async Task EliminarCliente(Cliente cliente)
+        {
+            if (cliente == null)
+                return;
+
+            try
+            {
+                await _repository.EliminarClienteAsync(cliente);
+
+                Clientes.Remove(cliente);
+
+                ClienteSeleccionado = null;
+
+                Mensaje = $"Se eliminó el cliente {cliente.Nombre}";
+            }
+            catch (Exception ex)
+            {
+                Mensaje = $"Error al eliminar cliente: {ex.Message}";
             }
         }
 

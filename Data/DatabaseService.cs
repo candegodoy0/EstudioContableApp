@@ -39,5 +39,20 @@ namespace EstudioContableApp.Data
 
             return await _database.Table<Cliente>().ToListAsync();
         }
+        // guarda o actualiza un cliente individual
+        public async Task GuardarClienteAsync(Cliente cliente)
+        {
+            await InitAsync();
+
+            await _database.InsertOrReplaceAsync(cliente);
+        }
+
+        // elimina un cliente de la base local
+        public async Task EliminarClienteAsync(Cliente cliente)
+        {
+            await InitAsync();
+
+            await _database.DeleteAsync(cliente);
+        }
     }
 }

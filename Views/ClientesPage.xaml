@@ -4,17 +4,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="EstudioContableApp.Views.ClientesPage">
 
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="12">
 
         <!-- titulo de la app -->
         <Label 
+        Grid.Row="0"
         Text="Estudio Contable - Gestión de Clientes"
         FontSize="20"
         FontAttributes="Bold"
         HorizontalOptions="Center" />
 
+        <!-- formulario para agregar cliente manualmente -->
+        <VerticalStackLayout Grid.Row="1" Spacing="8">
+
+            <Entry
+                Placeholder="Nombre del cliente"
+                Text="{Binding NuevoNombre}" />
+
+            <Entry
+                Placeholder="Email del cliente"
+                Text="{Binding NuevoEmail}"
+                Keyboard="Email" />
+
+            <Button
+                Text="Guardar cliente"
+                BackgroundColor="#1976D2"
+                TextColor="White"
+                Command="{Binding GuardarClienteCommand}" />
+
+        </VerticalStackLayout>
+
         <!-- boton para consumir API -->
         <Button 
+            Grid.Row="2"
             Text="Cargar clientes"
             BackgroundColor="#4CAF50"
             TextColor="White"
@@ -22,16 +44,18 @@
 
         <!-- mensaje de estado (errores / info) -->
         <Label 
+            Grid.Row="3"
             Text="{Binding Mensaje}" 
             FontAttributes="Bold"
             TextColor="Gray" />
 
         <!-- lista de clientes -->
         <CollectionView 
+            Grid.Row="4"
     ItemsSource="{Binding Clientes}"
     SelectionMode="Single"
     SelectedItem="{Binding ClienteSeleccionado}">
-            
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Stroke="LightGray" Padding="10" Margin="5">
@@ -45,13 +69,19 @@
                                 Text="Cliente activo" 
                                 FontSize="10" 
                                 TextColor="Green"/>
-                            
+
+                            <Button
+                                Text="Eliminar"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarClienteCommand}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="#D32F2F"
+                                TextColor="White"
+                                FontSize="12" />
+
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
-    </VerticalStackLayout>
-
+    </Grid>
 </ContentPage>
