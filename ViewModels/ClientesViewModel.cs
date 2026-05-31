@@ -27,7 +27,7 @@ namespace EstudioContableApp.ViewModels
         private string nuevoEmail;
 
         // cliente seleccionado en la lista
-        // cuando cambia, vamos a navegar al detalle amaticamente
+        // cuando cambia, cargamos sus datos en el formulario para editar
         [ObservableProperty]
         private Cliente clienteSeleccionado;
 
@@ -42,7 +42,8 @@ namespace EstudioContableApp.ViewModels
         {
             if (value != null)
             {
-                IrADetalle(value);
+                NuevoNombre = value.Nombre;
+                NuevoEmail = value.Email;
             }
         }
 
@@ -83,19 +84,27 @@ namespace EstudioContableApp.ViewModels
                     return;
                 }
 
-                var cliente = new Cliente
-                {
-                    Nombre = NuevoNombre,
-                    Email = NuevoEmail,
-                    Vencimiento = "IVA - 20/05"
-                };
+                var cliente = ClienteSeleccionado ?? new Cliente();
+
+                cliente.Nombre = NuevoNombre;
+                cliente.Email = NuevoEmail;
+                cliente.Vencimiento = "IVA - 20/05";
 
                 await _repository.GuardarClienteAsync(cliente);
 
-                Clientes.Add(cliente);
-
+                if (ClienteSeleccionado == null)
+                {
+                    Clientes.Add(cliente);
+                }
+                else
+                {
+                    var index = Clientes.IndexOf(ClienteSeleccionado);
+                    if (index >= 0)
+                        Clientes[index] = cliente;
+                }
                 NuevoNombre = string.Empty;
                 NuevoEmail = string.Empty;
+                ClienteSeleccionado = null;
 
                 Mensaje = $"Cliente {cliente.Nombre} agregado correctamente";
             }
@@ -126,13 +135,6 @@ namespace EstudioContableApp.ViewModels
             {
                 Mensaje = $"Error al eliminar cliente: {ex.Message}";
             }
-        }
-
-        // navegacion al detalle pasando parametros por query
-        private async void IrADetalle(Cliente cliente)
-        {
-            await Shell.Current.GoToAsync(
-                $"detalle?nombre={cliente.Nombre}&email={cliente.Email}");
         }
     }
 }
