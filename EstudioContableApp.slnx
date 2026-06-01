@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="../EstudioContableApp.Tests/EstudioContableApp.Tests.csproj" Id="94735b0b-33d3-4a6d-8bcc-a918bb2aaa65" />
   <Project Path="EstudioContableApp.csproj" />
 </Solution>
