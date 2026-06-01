@@ -1,0 +1,33 @@
+﻿name: CI - EstudioContableApp
+
+on:
+  push:
+    branches:
+      - develop
+      - feature/github-actions
+
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restaurar dependencias
+        run: dotnet restore EstudioContableApp.slnx
+
+      - name: Compilar solucion
+        run: dotnet build EstudioContableApp.slnx --configuration Debug --no-restore
+
+      - name: Ejecutar pruebas
+        run: dotnet test EstudioContableApp.Tests/EstudioContableApp.Tests.csproj --configuration Debug --no-build
