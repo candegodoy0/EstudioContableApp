@@ -30,4 +30,4 @@ jobs:
         run: dotnet build EstudioContableApp.slnx --configuration Debug --no-restore
 
       - name: Ejecutar pruebas
-        run: dotnet test EstudioContableApp.Tests/EstudioContableApp.Tests.csproj --configuration Debug --no-build
+        run: dotnet test EstudioContableApp.slnx --configuration Debug --no-build
