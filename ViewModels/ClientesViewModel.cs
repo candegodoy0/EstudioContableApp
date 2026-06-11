@@ -3,6 +3,7 @@ using EstudioContableApp.Models;
 using EstudioContableApp.Repositories;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using EstudioContableApp.Validators;
 
 
 namespace EstudioContableApp.ViewModels
@@ -77,10 +78,15 @@ namespace EstudioContableApp.ViewModels
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(NuevoNombre) ||
-                    string.IsNullOrWhiteSpace(NuevoEmail))
+                if (!ClienteValidator.NombreValido(NuevoNombre))
                 {
-                    Mensaje = "Debe completar nombre y email";
+                    Mensaje = "Debe ingresar un nombre";
+                    return;
+                }
+
+                if (!ClienteValidator.EmailValido(NuevoEmail))
+                {
+                    Mensaje = "Debe ingresar un email válido";
                     return;
                 }
 
