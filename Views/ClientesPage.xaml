@@ -78,6 +78,14 @@
                                 TextColor="White"
                                 FontSize="12" />
 
+                            <Button
+                                Text="Ver detalle"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VerDetalleClienteCommand}"
+                                CommandParameter="{Binding .}"
+                                BackgroundColor="#455A64"
+                                TextColor="White"
+                                FontSize="12" />
+
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>

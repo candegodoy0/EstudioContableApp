@@ -136,5 +136,15 @@ namespace EstudioContableApp.ViewModels
                 Mensaje = $"Error al eliminar cliente: {ex.Message}";
             }
         }
+        // navega a la pantalla de detalle pasando los datos del cliente
+        [RelayCommand]
+        private async Task VerDetalleCliente(Cliente cliente)
+        {
+            if (cliente == null)
+                return;
+
+            await Shell.Current.GoToAsync(
+                $"detalle?nombre={cliente.Nombre}&email={cliente.Email}&vencimiento={cliente.Vencimiento}");
+        }
     }
 }

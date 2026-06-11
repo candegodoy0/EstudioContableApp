@@ -12,6 +12,8 @@
 
         <Label Text="{Binding Nombre}" FontSize="18"/>
         <Label Text="{Binding Email}" FontSize="14"/>
+        <Label Text="{Binding Vencimiento}" FontSize="14" TextColor="Red"/>
+        <Label Text="Cliente activo" FontSize="12" TextColor="Green"/>
 
     </VerticalStackLayout>
 
