@@ -64,6 +64,7 @@ namespace EstudioContableApp.ViewModels
                 foreach (var c in lista)
                     Clientes.Add(c);
 
+                System.Diagnostics.Debug.WriteLine($"Se cargaron {Clientes.Count} clientes");
                 Mensaje = $"Se cargaron {Clientes.Count} clientes correctamente";
             }
             catch (Exception ex)
@@ -112,6 +113,7 @@ namespace EstudioContableApp.ViewModels
                 NuevoEmail = string.Empty;
                 ClienteSeleccionado = null;
 
+                System.Diagnostics.Debug.WriteLine($"Cliente guardado: {cliente.Nombre}");
                 Mensaje = $"Cliente {cliente.Nombre} agregado correctamente";
             }
             catch (Exception ex)
@@ -135,6 +137,7 @@ namespace EstudioContableApp.ViewModels
 
                 ClienteSeleccionado = null;
 
+                System.Diagnostics.Debug.WriteLine($"Cliente eliminado: {cliente.Nombre}");
                 Mensaje = $"Se eliminó el cliente {cliente.Nombre}";
             }
             catch (Exception ex)
