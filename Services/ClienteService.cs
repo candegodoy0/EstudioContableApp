@@ -11,8 +11,6 @@ namespace EstudioContableApp.Services
 
         public async Task<List<Cliente>> ObtenerClientesAsync()
         {
-            try
-            {
                 var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
 
                 // si la respuesta fue correcta (200)
@@ -23,17 +21,8 @@ namespace EstudioContableApp.Services
                     // si por alguna razon viene null, devuelvo lista vacia
                     return data ?? new List<Cliente>();
                 }
-                else
-                {
                     // esto seria un error tipo 404, 500, etc.
-                    throw new Exception($"Error HTTP: {response.StatusCode}");
+                    throw new HttpRequestException($"Error HTTP: {response.StatusCode}");
                 }
             }
-            catch (HttpRequestException)
-            {
-                // este error es mas de conexion 
-                throw new Exception("No hay conexión a internet");
-            }
-        }
-    }
 }
