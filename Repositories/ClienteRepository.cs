@@ -4,6 +4,11 @@ using EstudioContableApp.Services;
 
 namespace EstudioContableApp.Repositories
 {
+    /// <summary>
+    /// Implementación del repositorio de clientes.
+    /// Se encarga de obtener y persistir información utilizando
+    /// la API y la base de datos local.
+    /// </summary>
     public class ClienteRepository : IClienteRepository
     {
         private readonly ClienteService _service;
@@ -17,7 +22,10 @@ namespace EstudioContableApp.Repositories
             _service = service;
             _database = database;
         }
-
+        /// <summary>
+        /// Obtiene los clientes desde la API.
+        /// Si la API falla, recupera los datos almacenados localmente.
+        /// </summary>
         public async Task<List<Cliente>> ObtenerClientesAsync()
         {
             try
@@ -36,11 +44,16 @@ namespace EstudioContableApp.Repositories
                 return await _database.ObtenerClientesAsync();
             }
         }
+        /// <summary>
+        /// Guarda un cliente en la base de datos local.
+        /// </summary>
         public async Task GuardarClienteAsync(Cliente cliente)
         {
             await _database.GuardarClienteAsync(cliente);
         }
-
+        /// <summary>
+        /// Elimina un cliente de la base de datos local.
+        /// </summary>
         public async Task EliminarClienteAsync(Cliente cliente)
         {
             await _database.EliminarClienteAsync(cliente);
