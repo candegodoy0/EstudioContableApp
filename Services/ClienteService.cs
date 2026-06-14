@@ -3,12 +3,16 @@ using EstudioContableApp.Models;
 
 namespace EstudioContableApp.Services
 {
+    /// <summary>
+    /// Servicio encargado de obtener clientes desde la API externa.
+    /// </summary>
     public class ClienteService
     {
         private readonly HttpClient _httpClient = new();
 
-        // metodo que se encarga de ir a buscar los datos a la API
-
+        /// <summary>
+        /// Obtiene la lista de clientes desde la API.
+        /// </summary>
         public async Task<List<Cliente>> ObtenerClientesAsync()
         {
                 var response = await _httpClient.GetAsync("https://jsonplaceholder.typicode.com/users");
