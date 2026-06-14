@@ -86,4 +86,9 @@
 	  <None Include=".github\workflows\ci.yml" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Compile Remove="EstudioContableApp.Tests\**\*.cs" />
+		<None Remove="EstudioContableApp.Tests\**\*" />
+	</ItemGroup>
+
 </Project>
