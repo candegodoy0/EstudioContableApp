@@ -1,8 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Microsoft.Maui.Controls;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace EstudioContableApp.ViewModels
 {
@@ -27,6 +24,9 @@ namespace EstudioContableApp.ViewModels
 
         [ObservableProperty]
         private string mensaje = string.Empty;
+
+        [ObservableProperty]
+        private string ubicacion = "Ubicación no registrada";
 
         [RelayCommand]
         private async Task SeleccionarImagen()
@@ -95,5 +95,50 @@ namespace EstudioContableApp.ViewModels
                 Mensaje = $"Error al tomar foto: {ex.Message}";
             }
         }
+        [RelayCommand]
+        private async Task ObtenerUbicacion()
+        {
+            try
+            {
+                var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+
+                if (status != PermissionStatus.Granted)
+                    status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+
+                if (status != PermissionStatus.Granted)
+                {
+                    Mensaje = "No se otorgó permiso para acceder a la ubicación";
+                    return;
+                }
+
+                var request = new GeolocationRequest(
+                    GeolocationAccuracy.Medium,
+                    TimeSpan.FromSeconds(10));
+
+                var location = await Geolocation.GetLocationAsync(request);
+
+                if (location == null)
+                {
+                    Mensaje = "No se pudo obtener la ubicación actual";
+                    return;
+                }
+
+                Ubicacion = $"Latitud: {location.Latitude:F6} - Longitud: {location.Longitude:F6}";
+                Mensaje = "Ubicación obtenida correctamente";
+            }
+            catch (FeatureNotSupportedException)
+            {
+                Mensaje = "La geolocalización no está disponible en este dispositivo";
+            }
+            catch (PermissionException)
+            {
+                Mensaje = "Permiso de ubicación denegado";
+            }
+            catch (Exception ex)
+            {
+                Mensaje = $"Error al obtener ubicación: {ex.Message}";
+            }
+        }
     }
 }
+    

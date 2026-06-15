@@ -32,7 +32,19 @@
                    Aspect="AspectFit"
                    BackgroundColor="LightGray" />
 
-        <Label Text="{Binding Mensaje}"
+            <Label Text="Ubicación del cliente"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   Margin="0,15,0,0" />
+
+            <Button Text="Obtener ubicación actual"
+        Command="{Binding ObtenerUbicacionCommand}" />
+
+            <Label Text="{Binding Ubicacion}"
+                   FontSize="13"
+                   TextColor="DarkSlateGray" />
+
+            <Label Text="{Binding Mensaje}"
                    FontAttributes="Bold"
                    TextColor="Gray" />
 
