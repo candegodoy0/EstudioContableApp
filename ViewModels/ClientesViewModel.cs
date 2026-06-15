@@ -113,6 +113,7 @@ namespace EstudioContableApp.ViewModels
                 NuevoEmail = string.Empty;
                 ClienteSeleccionado = null;
 
+                VibrarConfirmacion();
                 System.Diagnostics.Debug.WriteLine($"Cliente guardado: {cliente.Nombre}");
                 Mensaje = $"Cliente {cliente.Nombre} agregado correctamente";
             }
@@ -137,6 +138,7 @@ namespace EstudioContableApp.ViewModels
 
                 ClienteSeleccionado = null;
 
+                VibrarConfirmacion();
                 System.Diagnostics.Debug.WriteLine($"Cliente eliminado: {cliente.Nombre}");
                 Mensaje = $"Se eliminó el cliente {cliente.Nombre}";
             }
@@ -155,5 +157,14 @@ namespace EstudioContableApp.ViewModels
             await Shell.Current.GoToAsync(
                 $"detalle?nombre={cliente.Nombre}&email={cliente.Email}&vencimiento={cliente.Vencimiento}");
         }
+
+        private void VibrarConfirmacion()
+        {
+            if (Vibration.Default.IsSupported)
+            {
+                Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
+            }
+        }
     }
+
 }
