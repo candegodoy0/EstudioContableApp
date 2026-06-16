@@ -1,9 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using EstudioContableApp.Models;
 using EstudioContableApp.Repositories;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using EstudioContableApp.Validators;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.Core.Models;
+using System.Collections.ObjectModel;
 
 
 namespace EstudioContableApp.ViewModels
@@ -114,6 +116,16 @@ namespace EstudioContableApp.ViewModels
                 ClienteSeleccionado = null;
 
                 VibrarConfirmacion();
+
+                var notification = new NotificationRequest
+                {
+                    NotificationId = 100,
+                    Title = "Cliente guardado",
+                    Description = $"Se registró correctamente {cliente.Nombre}"
+                };
+
+                await LocalNotificationCenter.Current.Show(notification);
+
                 System.Diagnostics.Debug.WriteLine($"Cliente guardado: {cliente.Nombre}");
                 Mensaje = $"Cliente {cliente.Nombre} agregado correctamente";
             }

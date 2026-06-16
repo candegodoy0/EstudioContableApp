@@ -4,6 +4,7 @@ using EstudioContableApp.Services;
 using EstudioContableApp.Repositories;
 using EstudioContableApp.ViewModels;
 using EstudioContableApp.Views;
+using Plugin.LocalNotification;
 
 namespace EstudioContableApp
 {
@@ -14,6 +15,7 @@ namespace EstudioContableApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseLocalNotification()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
