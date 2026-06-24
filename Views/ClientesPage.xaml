@@ -26,6 +26,16 @@
                 Text="{Binding NuevoEmail}"
                 Keyboard="Email" />
 
+            <Entry
+                Placeholder="Buscar cliente por nombre"
+                Text="{Binding TextoBusqueda}" />
+
+            <Button
+                Text="Buscar cliente"
+                BackgroundColor="#FF9800"
+                TextColor="White"
+                Command="{Binding BuscarClienteCommand}" />
+
             <Button
                 Text="Guardar cliente"
                 BackgroundColor="#1976D2"

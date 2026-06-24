@@ -29,6 +29,9 @@ namespace EstudioContableApp.ViewModels
         [ObservableProperty]
         private string nuevoEmail = string.Empty;
 
+        [ObservableProperty]
+        private string textoBusqueda = string.Empty;
+
         // cliente seleccionado en la lista
         // cuando cambia, cargamos sus datos en el formulario para editar
         [ObservableProperty]
@@ -168,6 +171,45 @@ namespace EstudioContableApp.ViewModels
 
             await Shell.Current.GoToAsync(
                 $"detalle?nombre={cliente.Nombre}&email={cliente.Email}&vencimiento={cliente.Vencimiento}");
+        }
+
+        [RelayCommand]
+        private async Task BuscarCliente()
+        {
+            try
+            {
+                var lista = await _repository.ObtenerClientesAsync();
+
+                if (string.IsNullOrWhiteSpace(TextoBusqueda))
+                {
+                    Clientes.Clear();
+
+                    foreach (var cliente in lista)
+                        Clientes.Add(cliente);
+
+                    Mensaje = "Mostrando todos los clientes";
+                    return;
+                }
+
+                var resultados = lista
+                    .Where(c => c.Nombre.Contains(TextoBusqueda,
+                        StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+
+                Clientes.Clear();
+
+                foreach (var cliente in resultados)
+                    Clientes.Add(cliente);
+
+                if (resultados.Count == 0)
+                    Mensaje = "No se encontró ningún cliente";
+                else
+                    Mensaje = $"Se encontraron {resultados.Count} cliente(s)";
+            }
+            catch (Exception ex)
+            {
+                Mensaje = $"Error en la búsqueda: {ex.Message}";
+            }
         }
 
         private void VibrarConfirmacion()
