@@ -5,6 +5,7 @@ on:
     branches:
       - develop
       - feature/github-actions
+      - feature/github-actions-mejorado
 
   pull_request:
     branches:
@@ -13,6 +14,10 @@ on:
 jobs:
   build-and-test:
     runs-on: windows-latest
+    
+    strategy: 
+      matrix: 
+       configuration: [Debug, Release]
 
     steps:
       - name: Descargar codigo
@@ -23,6 +28,14 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
+      - name: Cache NuGet 
+        uses: actions/cache@v4 
+        with: 
+         path: ~/.nuget/packages 
+         key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }} 
+         restore-keys: | 
+              ${{ runner.os }}-nuget-
+
       - name: Restaurar dependencias
         run: dotnet restore EstudioContableApp.slnx
 
@@ -31,3 +44,9 @@ jobs:
 
       - name: Ejecutar pruebas
         run: dotnet test EstudioContableApp.slnx --configuration Debug --no-build
+
+      - name: Publicar resultados 
+        uses: actions/upload-artifact@v4 
+        with: 
+              name: build-${{ matrix.configuration }} 
+              path: .
