@@ -145,6 +145,15 @@ namespace EstudioContableApp.ViewModels
             if (cliente == null)
                 return;
 
+            bool confirmar = await Shell.Current.DisplayAlert(
+                "Confirmar eliminación",
+                $"¿Desea eliminar al cliente {cliente.Nombre}?",
+                "Sí",
+                "Cancelar");
+
+            if (!confirmar)
+                return;
+
             try
             {
                 await _repository.EliminarClienteAsync(cliente);
@@ -154,7 +163,8 @@ namespace EstudioContableApp.ViewModels
                 ClienteSeleccionado = null;
 
                 VibrarConfirmacion();
-                System.Diagnostics.Debug.WriteLine($"Cliente eliminado: {cliente.Nombre}");
+                System.Diagnostics.Debug.WriteLine
+                    ($"Cliente eliminado: {cliente.Nombre}");
                 Mensaje = $"Se eliminó el cliente {cliente.Nombre}";
             }
             catch (Exception ex)
