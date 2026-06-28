@@ -2,53 +2,285 @@
 <ContentPage
     x:Class="EstudioContableApp.Views.DetalleClientePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Detalle del Cliente"
+    BackgroundColor="#F4F6FA">
 
     <ScrollView>
-        <VerticalStackLayout Padding="25" Spacing="15">
 
-        <Label Text="Detalle del cliente"
-               FontSize="22"
-               FontAttributes="Bold" />
+        <VerticalStackLayout
+            Padding="20"
+            Spacing="18">
 
-        <Label Text="{Binding Nombre}" FontSize="18"/>
-        <Label Text="{Binding Email}" FontSize="14"/>
-        <Label Text="{Binding Vencimiento}" FontSize="14" TextColor="Red"/>
-        <Label Text="Cliente activo" FontSize="12" TextColor="Green"/>
-        
-        <Label Text="Comprobante del cliente"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   Margin="0,15,0,0"/>
+            <!-- encabezado -->
 
-        <Button Text="Seleccionar imagen de galería"
-                    Command="{Binding SeleccionarImagenCommand}" />
+            <Border
+                BackgroundColor="#2563EB"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 24"
+                Padding="24">
 
-        <Button Text="Tomar foto"
-                    Command="{Binding TomarFotoCommand}" />
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="10">
 
-        <Image Source="{Binding ImagenComprobante}"
-                   HeightRequest="220"
-                   Aspect="AspectFit"
-                   BackgroundColor="LightGray" />
+                    <Border
+                        WidthRequest="95"
+                        HeightRequest="95"
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 50">
 
-            <Label Text="Ubicación del cliente"
-                   FontSize="18"
-                   FontAttributes="Bold"
-                   Margin="0,15,0,0" />
+                        <Label
+                            Text="{Binding Iniciales}"
+                            FontSize="34"
+                            FontAttributes="Bold"
+                            TextColor="#2563EB"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"/>
 
-            <Button Text="Obtener ubicación actual"
-        Command="{Binding ObtenerUbicacionCommand}" />
+                    </Border>
 
-            <Label Text="{Binding Ubicacion}"
-                   FontSize="13"
-                   TextColor="DarkSlateGray" />
+                    <Label
+                        Text="{Binding Nombre}"
+                        FontSize="26"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        HorizontalOptions="Center"/>
 
-            <Label Text="{Binding Mensaje}"
-                   FontAttributes="Bold"
-                   TextColor="Gray" />
+                    <Label
+                        Text="{Binding Email}"
+                        FontSize="14"
+                        TextColor="#E5E7EB"
+                        HorizontalOptions="Center"/>
 
-    </VerticalStackLayout>
+                    <Border
+                        BackgroundColor="#16A34A"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="10,4">
+
+                        <Label
+                            Text="Cliente Activo"
+                            TextColor="White"
+                            FontAttributes="Bold"/>
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- datos -->
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18"
+                Padding="18">
+
+                <VerticalStackLayout
+                    Spacing="15">
+
+                    <Label
+                        Text="Información del Cliente"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#111827"/>
+
+                    <Grid
+                        ColumnDefinitions="Auto,*"
+                        RowDefinitions="Auto,Auto,Auto"
+                        ColumnSpacing="12"
+                        RowSpacing="15">
+
+                        <Label
+                            Text="Nombre"
+                            FontAttributes="Bold"
+                            TextColor="#6B7280"/>
+
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding Nombre}"
+                            TextColor="#111827"/>
+
+                        <Label
+                            Grid.Row="1"
+                            Text="Email"
+                            FontAttributes="Bold"
+                            TextColor="#6B7280"/>
+
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding Email}"
+                            TextColor="#111827"/>
+
+                        <Label
+                            Grid.Row="2"
+                            Text="Vencimiento"
+                            FontAttributes="Bold"
+                            TextColor="#6B7280"/>
+
+                        <Label
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="{Binding Vencimiento}"
+                            FontAttributes="Bold"
+                            TextColor="#DC2626"/>
+
+                    </Grid>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- comprobante -->
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18"
+                Padding="18">
+
+                <VerticalStackLayout
+                    Spacing="15">
+
+                    <Label
+                        Text="Comprobante"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#111827"/>
+
+                    <Grid
+                        ColumnDefinitions="*,*"
+                        ColumnSpacing="10">
+
+                        <Button
+                            Grid.Column="0"
+                            Text="📷 Cámara"
+                            HeightRequest="45"
+                            CornerRadius="12"
+                            BackgroundColor="#2563EB"
+                            TextColor="White"
+                            Command="{Binding TomarFotoCommand}"/>
+
+                        <Button
+                            Grid.Column="1"
+                            Text="🖼 Galería"
+                            HeightRequest="45"
+                            CornerRadius="12"
+                            BackgroundColor="#10B981"
+                            TextColor="White"
+                            Command="{Binding SeleccionarImagenCommand}"/>
+
+                    </Grid>
+
+                    <Border
+                        HeightRequest="230"
+                        BackgroundColor="#F3F4F6"
+                        Stroke="#D1D5DB"
+                        StrokeShape="RoundRectangle 14">
+
+                        <Image
+                            Source="{Binding ImagenComprobante}"
+                            Aspect="AspectFit"/>
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- ubicación del cliente -->
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18"
+                Padding="18">
+
+                <VerticalStackLayout
+                    Spacing="15">
+
+                    <Label
+                        Text="Ubicación"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#111827"/>
+
+                    <Button
+                        Text="📍 Obtener ubicación actual"
+                        HeightRequest="45"
+                        CornerRadius="12"
+                        BackgroundColor="#F59E0B"
+                        TextColor="White"
+                        Command="{Binding ObtenerUbicacionCommand}"/>
+
+                    <Border
+                        BackgroundColor="#F9FAFB"
+                        Stroke="#E5E7EB"
+                        StrokeShape="RoundRectangle 12"
+                        Padding="15">
+
+                        <Label
+                            Text="{Binding Ubicacion}"
+                            FontSize="14"
+                            TextColor="#374151"/>
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- mensaje -->
+
+            <Border
+                BackgroundColor="#EFF6FF"
+                Stroke="#BFDBFE"
+                StrokeShape="RoundRectangle 12"
+                Padding="14">
+
+                <Label
+                    Text="{Binding Mensaje}"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    FontAttributes="Bold"
+                    TextColor="#1D4ED8"/>
+
+            </Border>
+
+            <!-- acciones -->
+
+            <Grid
+                ColumnDefinitions="*,*"
+                ColumnSpacing="12"
+                Margin="0,10,0,25">
+
+                <Button
+                    Grid.Column="0"
+                    Text="← Volver"
+                    HeightRequest="48"
+                    CornerRadius="12"
+                    BackgroundColor="#6B7280"
+                    TextColor="White"
+                    Clicked="OnVolverClicked"/>
+
+                <Button
+                    Grid.Column="1"
+                    Text="✏ Editar"
+                    HeightRequest="48"
+                    CornerRadius="12"
+                    BackgroundColor="#2563EB"
+                    TextColor="White"/>
+
+            </Grid>
+
+        </VerticalStackLayout>
+
     </ScrollView>
 
 </ContentPage>

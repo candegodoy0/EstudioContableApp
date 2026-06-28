@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\NuevoClientePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ClientesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -87,6 +90,12 @@
 	<ItemGroup>
 		<Compile Remove="EstudioContableApp.Tests\**\*.cs" />
 		<None Remove="EstudioContableApp.Tests\**\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\NuevoClientePage.xaml.cs">
+	    <DependentUpon>NuevoClientePage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

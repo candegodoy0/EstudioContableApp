@@ -13,6 +13,22 @@ namespace EstudioContableApp.ViewModels
         [ObservableProperty]
         private string nombre = string.Empty;
 
+        public string Iniciales
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Nombre))
+                    return "?";
+
+                var partes = Nombre.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (partes.Length == 1)
+                    return partes[0][0].ToString().ToUpper();
+
+                return $"{partes[0][0]}{partes[1][0]}".ToUpper();
+            }
+        }
+
         [ObservableProperty]
         private string email = string.Empty;
 

@@ -25,6 +25,7 @@ namespace EstudioContableApp
             // servicios de datos
             builder.Services.AddSingleton<ClienteService>();
             builder.Services.AddSingleton<DatabaseService>();
+            builder.Services.AddTransient<NuevoClientePage>();
 
             // repositorios
             builder.Services.AddSingleton<IClienteRepository, ClienteRepository>();
@@ -32,6 +33,7 @@ namespace EstudioContableApp
             // viewmodels
             builder.Services.AddTransient<ClientesViewModel>();
             builder.Services.AddTransient<DetalleClienteViewModel>();
+            builder.Services.AddTransient<NuevoClienteViewModel>();
 
             // vistas
             builder.Services.AddTransient<ClientesPage>();

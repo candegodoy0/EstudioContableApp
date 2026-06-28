@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="EstudioContableApp.Views.NuevoClientePage"
+    Title="Nuevo Cliente"
+    BackgroundColor="#F3F5F9">
+
+    <ScrollView>
+
+        <VerticalStackLayout
+            Padding="25"
+            Spacing="25">
+
+            <!-- encabezado -->
+
+            <VerticalStackLayout
+                HorizontalOptions="Center"
+                Spacing="5">
+
+                <Border
+                    WidthRequest="90"
+                    HeightRequest="90"
+                    BackgroundColor="#2563EB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 45">
+
+                    <Label
+                        Text="👤"
+                        FontSize="42"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        TextColor="White"/>
+
+                </Border>
+
+                <Label
+                    Text="Nuevo Cliente"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="#111827"
+                    HorizontalOptions="Center"/>
+
+                <Label
+                    Text="Complete los datos para registrar un nuevo cliente"
+                    FontSize="14"
+                    TextColor="#6B7280"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"/>
+
+            </VerticalStackLayout>
+
+            <!-- formulario -->
+
+            <Border
+                BackgroundColor="White"
+                Stroke="#E5E7EB"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 18"
+                Padding="20">
+
+                <VerticalStackLayout
+                    Spacing="18">
+
+                    <Label
+                        Text="Nombre"
+                        FontAttributes="Bold"
+                        TextColor="#374151"/>
+
+                    <Entry
+                        Placeholder="Ingrese el nombre"
+                        Text="{Binding NuevoNombre}"
+                        BackgroundColor="#F9FAFB"
+                        TextColor="Black"
+                        PlaceholderColor="#9CA3AF"/>
+
+                    <Label
+                        Text="Correo electrónico"
+                        FontAttributes="Bold"
+                        TextColor="#374151"/>
+
+                    <Entry
+                        Placeholder="Ingrese el email"
+                        Keyboard="Email"
+                        Text="{Binding NuevoEmail}"
+                        BackgroundColor="#F9FAFB"
+                        TextColor="Black"
+                        PlaceholderColor="#9CA3AF"/>
+
+                    <Button
+    Text="Guardar Cliente"
+    HeightRequest="48"
+    CornerRadius="12"
+    FontAttributes="Bold"
+    BackgroundColor="#2563EB"
+    TextColor="White"
+    Clicked="OnGuardarClicked"/>
+
+                    <Button
+                        Text="Cancelar"
+                        HeightRequest="48"
+                        CornerRadius="12"
+                        BackgroundColor="#E5E7EB"
+                        TextColor="#374151"
+                        Clicked="OnCancelarClicked"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <Border
+                BackgroundColor="#EFF6FF"
+                Stroke="#BFDBFE"
+                StrokeShape="RoundRectangle 12"
+                Padding="12">
+
+                <Label
+                    Text="{Binding Mensaje}"
+                    FontSize="13"
+                    TextColor="#1D4ED8"
+                    HorizontalTextAlignment="Center"/>
+
+            </Border>
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

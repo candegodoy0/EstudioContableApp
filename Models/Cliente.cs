@@ -22,5 +22,21 @@ namespace EstudioContableApp.Models
         // dato propio de la app para simular vencimientos del estudio contable
         [MaxLength(50)]
         public string Vencimiento { get; set; } = "IVA - 20/05";
+
+        public string Iniciales
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Nombre))
+                    return "?";
+
+                var palabras = Nombre.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (palabras.Length == 1)
+                    return palabras[0][0].ToString().ToUpper();
+
+                return $"{palabras[0][0]}{palabras[1][0]}".ToUpper();
+            }
+        }
     }
 }

@@ -1,105 +1,363 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage 
+<ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="EstudioContableApp.Views.ClientesPage">
+    x:Class="EstudioContableApp.Views.ClientesPage"
+    BackgroundColor="#181C24">
 
-    <Grid Padding="20" RowDefinitions="Auto,Auto,Auto,Auto,*" RowSpacing="12">
+    <Grid
+        Padding="20"
+        RowDefinitions="Auto,Auto,Auto,Auto,*" 
+        RowSpacing="18">
 
         <!-- titulo de la app -->
-        <Label 
-        Grid.Row="0"
-        Text="Estudio Contable - Gestión de Clientes"
-        FontSize="20"
-        FontAttributes="Bold"
-        HorizontalOptions="Center" />
+
+        <Grid Grid.Row="0"
+              ColumnDefinitions="*,Auto">
+
+            <VerticalStackLayout>
+
+                <Label
+                    Text="Estudio Contable"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="White"/>
+
+                <Label
+                    Text="CRM de Clientes"
+                    FontSize="15"
+                    TextColor="#A8B3C2"/>
+
+            </VerticalStackLayout>
+
+            <Border
+                Grid.Column="1"
+                WidthRequest="55"
+                HeightRequest="55"
+                BackgroundColor="#2E88FF"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 28">
+
+                <Label
+                    Text="👥"
+                    FontSize="26"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+
+            </Border>
+
+        </Grid>
+
+        <!-- tarjeta principal -->
+
+        <Border
+            Grid.Row="1"
+            BackgroundColor="#242B38"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 20"
+            Padding="18">
+
+            <Grid
+                ColumnDefinitions="*,Auto">
+
+                <VerticalStackLayout
+                    Spacing="4">
+
+                    <Label
+                        Text="Panel de Clientes"
+                        FontSize="22"
+                        FontAttributes="Bold"
+                        TextColor="White"/>
+
+                    <Label
+                        Text="Administrá toda la información de tus clientes."
+                        FontSize="13"
+                        TextColor="#C4CCD9"/>
+
+                </VerticalStackLayout>
+
+                <Border
+                    Grid.Column="1"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    BackgroundColor="#1976D2"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 30">
+
+                    <Label
+                        Text="+"
+                        FontSize="34"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"/>
+
+                </Border>
+
+            </Grid>
+
+        </Border>
 
         <!-- formulario para agregar cliente manualmente -->
-        <VerticalStackLayout Grid.Row="1" Spacing="8">
 
-            <Entry
-                Placeholder="Nombre del cliente"
-                Text="{Binding NuevoNombre}" />
+        <Border
+            Grid.Row="2"
+            BackgroundColor="#242B38"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 20"
+            Padding="18">
 
-            <Entry
-                Placeholder="Email del cliente"
-                Text="{Binding NuevoEmail}"
-                Keyboard="Email" />
+            <VerticalStackLayout
+                Spacing="12">
 
-            <Entry
-                Placeholder="Buscar cliente por nombre"
-                Text="{Binding TextoBusqueda}" />
+                <Label
+                    Text="Nuevo Cliente"
+                    FontSize="19"
+                    FontAttributes="Bold"
+                    TextColor="White"/>
 
-            <Button
-                Text="Buscar cliente"
-                BackgroundColor="#FF9800"
-                TextColor="White"
-                Command="{Binding BuscarClienteCommand}" />
+                <Entry
+                    Placeholder="Nombre del cliente"
+                    PlaceholderColor="#8A95A8"
+                    BackgroundColor="#323B4A"
+                    TextColor="White"
+                    HeightRequest="50"
+                    Text="{Binding NuevoNombre}" />
 
-            <Button
-                Text="Guardar cliente"
-                BackgroundColor="#1976D2"
-                TextColor="White"
-                Command="{Binding GuardarClienteCommand}" />
+                <Entry
+                    Placeholder="Email del cliente"
+                    PlaceholderColor="#8A95A8"
+                    BackgroundColor="#323B4A"
+                    TextColor="White"
+                    HeightRequest="50"
+                    Keyboard="Email"
+                    Text="{Binding NuevoEmail}" />
+
+                <Button
+                    Text="Guardar cliente"
+                    HeightRequest="48"
+                    CornerRadius="14"
+                    FontAttributes="Bold"
+                    BackgroundColor="#2E88FF"
+                    TextColor="White"
+                    Command="{Binding GuardarClienteCommand}" />
+
+            </VerticalStackLayout>
+
+        </Border>
+
+        <!-- buscador -->
+
+        <Border
+            Grid.Row="3"
+            BackgroundColor="#242B38"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 20"
+            Padding="18">
+
+            <VerticalStackLayout
+                Spacing="12">
+
+                <Label
+                    Text="Buscar cliente"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    TextColor="White"/>
+
+                <Entry
+                    Placeholder="Buscar por nombre..."
+                    PlaceholderColor="#8A95A8"
+                    BackgroundColor="#323B4A"
+                    TextColor="White"
+                    HeightRequest="50"
+                    Text="{Binding TextoBusqueda}" />
+
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="10">
+
+                    <Button
+                        Grid.Column="0"
+                        Text="Buscar"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        BackgroundColor="#FF9800"
+                        TextColor="White"
+                        Command="{Binding BuscarClienteCommand}" />
+
+                    <!-- boton para consumir API -->
+
+                    <Button
+                        Grid.Column="1"
+                        Text="Actualizar"
+                        HeightRequest="46"
+                        CornerRadius="12"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        Command="{Binding CargarClientesCommand}" />
+
+                </Grid>
+
+                <!-- mensaje de estado (errores / info) -->
+
+                <Label
+                    Text="{Binding Mensaje}"
+                    FontAttributes="Bold"
+                    TextColor="#C4CCD9"/>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+        <VerticalStackLayout
+            Grid.Row="4"
+            Spacing="12">
+
+            <!-- lista de clientes -->
+
+            <CollectionView
+                ItemsSource="{Binding Clientes}"
+                SelectionMode="Single"
+                SelectedItem="{Binding ClienteSeleccionado}">
+
+                <CollectionView.ItemTemplate>
+
+                    <DataTemplate>
+
+                        <Border
+                            Margin="0,0,0,15"
+                            Padding="18"
+                            BackgroundColor="#242B38"
+                            Stroke="#353D4C"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 20">
+
+                            <Grid
+                                ColumnDefinitions="65,*"
+                                RowDefinitions="Auto,Auto,Auto,Auto">
+
+                                <!-- avatar -->
+
+                                <Border
+                                    WidthRequest="56"
+                                    HeightRequest="56"
+                                    BackgroundColor="#1976D2"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 28"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Start">
+
+                                    <Label
+                                        Text="{Binding Iniciales}"
+                                        FontSize="22"
+                                        FontAttributes="Bold"
+                                        TextColor="White"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center"/>
+
+                                </Border>
+
+                                <!-- nombre -->
+
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="2">
+
+                                    <Label
+                                        Text="{Binding Nombre}"
+                                        FontSize="19"
+                                        FontAttributes="Bold"
+                                        TextColor="White"/>
+
+                                    <Label
+                                        Text="{Binding Email}"
+                                        FontSize="13"
+                                        TextColor="#C9D0DB"/>
+
+                                </VerticalStackLayout>
+
+                                <!-- estado -->
+
+                                <HorizontalStackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,12,0,0"
+                                    Spacing="8">
+
+                                    <Border
+                                        BackgroundColor="#234E34"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 10"
+                                        Padding="10,4">
+
+                                        <Label
+                                            Text="ACTIVO"
+                                            FontSize="10"
+                                            FontAttributes="Bold"
+                                            TextColor="#7CFFAE"/>
+
+                                    </Border>
+
+                                    <Border
+                                        BackgroundColor="#5A2E2E"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 10"
+                                        Padding="10,4">
+
+                                        <Label
+                                            Text="{Binding Vencimiento}"
+                                            FontSize="10"
+                                            FontAttributes="Bold"
+                                            TextColor="#FFB4B4"/>
+
+                                    </Border>
+
+                                </HorizontalStackLayout>
+
+                                <!-- botones -->
+
+                                <Grid
+                                    Grid.Row="2"
+                                    Grid.ColumnSpan="2"
+                                    Margin="0,18,0,0"
+                                    ColumnDefinitions="*,*"
+                                    ColumnSpacing="10">
+
+                                    <Button
+                                        Grid.Column="0"
+                                        HeightRequest="42"
+                                        CornerRadius="12"
+                                        BackgroundColor="#1976D2"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Text="Ver detalle"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VerDetalleClienteCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                    <Button
+                                        Grid.Column="1"
+                                        HeightRequest="42"
+                                        CornerRadius="12"
+                                        BackgroundColor="#D32F2F"
+                                        TextColor="White"
+                                        FontAttributes="Bold"
+                                        Text="Eliminar"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarClienteCommand}"
+                                        CommandParameter="{Binding .}" />
+
+                                </Grid>
+
+                            </Grid>
+
+                        </Border>
+
+                    </DataTemplate>
+
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
 
         </VerticalStackLayout>
 
-        <!-- boton para consumir API -->
-        <Button 
-            Grid.Row="2"
-            Text="Cargar clientes"
-            BackgroundColor="#4CAF50"
-            TextColor="White"
-            Command="{Binding CargarClientesCommand}" />
-
-        <!-- mensaje de estado (errores / info) -->
-        <Label 
-            Grid.Row="3"
-            Text="{Binding Mensaje}" 
-            FontAttributes="Bold"
-            TextColor="Gray" />
-
-        <!-- lista de clientes -->
-        <CollectionView 
-            Grid.Row="4"
-    ItemsSource="{Binding Clientes}"
-    SelectionMode="Single"
-    SelectedItem="{Binding ClienteSeleccionado}">
-
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Stroke="LightGray" Padding="10" Margin="5">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Nombre}" FontAttributes="Bold"/>
-                            <Label Text="{Binding Email}" FontSize="12"/>
-                            <Label Text="{Binding Vencimiento}" FontSize="11" TextColor="Red"/>
-
-
-                            <Label 
-                                Text="Cliente activo" 
-                                FontSize="10" 
-                                TextColor="Green"/>
-
-                            <Button
-                                Text="Eliminar"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarClienteCommand}"
-                                CommandParameter="{Binding .}"
-                                BackgroundColor="#D32F2F"
-                                TextColor="White"
-                                FontSize="12" />
-
-                            <Button
-                                Text="Ver detalle"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VerDetalleClienteCommand}"
-                                CommandParameter="{Binding .}"
-                                BackgroundColor="#455A64"
-                                TextColor="White"
-                                FontSize="12" />
-
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
     </Grid>
+
 </ContentPage>

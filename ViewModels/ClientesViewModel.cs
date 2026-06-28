@@ -37,6 +37,8 @@ namespace EstudioContableApp.ViewModels
         [ObservableProperty]
         private Cliente? clienteSeleccionado;
 
+        public int CantidadClientes => Clientes.Count;
+
         // recibimos el repositorio desde MauiProgram usando Dependency Injection
         public ClientesViewModel(IClienteRepository repository)
         {
@@ -68,6 +70,8 @@ namespace EstudioContableApp.ViewModels
 
                 foreach (var c in lista)
                     Clientes.Add(c);
+
+                OnPropertyChanged(nameof(CantidadClientes));
 
                 System.Diagnostics.Debug.WriteLine($"Se cargaron {Clientes.Count} clientes");
                 Mensaje = $"Se cargaron {Clientes.Count} clientes correctamente";
@@ -107,6 +111,7 @@ namespace EstudioContableApp.ViewModels
                 if (ClienteSeleccionado == null)
                 {
                     Clientes.Add(cliente);
+                    OnPropertyChanged(nameof(CantidadClientes));
                 }
                 else
                 {
@@ -131,6 +136,7 @@ namespace EstudioContableApp.ViewModels
 
                 System.Diagnostics.Debug.WriteLine($"Cliente guardado: {cliente.Nombre}");
                 Mensaje = $"Cliente {cliente.Nombre} agregado correctamente";
+                await Shell.Current.GoToAsync("..");
             }
             catch (Exception ex)
             {
@@ -159,6 +165,7 @@ namespace EstudioContableApp.ViewModels
                 await _repository.EliminarClienteAsync(cliente);
 
                 Clientes.Remove(cliente);
+
 
                 ClienteSeleccionado = null;
 
@@ -228,7 +235,16 @@ namespace EstudioContableApp.ViewModels
             {
                 Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200));
             }
+
+
+
+        }
+
+        [RelayCommand]
+        private async Task IrANuevoCliente()
+        {
+            await Shell.Current.GoToAsync("nuevocliente");
         }
     }
 
-}
+    }
