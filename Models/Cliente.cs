@@ -38,5 +38,7 @@ namespace EstudioContableApp.Models
                 return $"{palabras[0][0]}{palabras[1][0]}".ToUpper();
             }
         }
+        [Ignore]
+        public bool EsEdicion { get; set; }
     }
 }

@@ -38,6 +38,7 @@ namespace EstudioContableApp
             // vistas
             builder.Services.AddTransient<ClientesPage>();
             builder.Services.AddTransient<DetalleClientePage>();
+            builder.Services.AddTransient<EditarClientePage>();
 
 #if DEBUG
             builder.Logging.AddDebug();

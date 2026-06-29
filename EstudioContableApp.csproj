@@ -72,6 +72,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Views\EditarClientePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\NuevoClientePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -93,6 +96,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\EditarClientePage.xaml.cs">
+	    <DependentUpon>EditarClientePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\NuevoClientePage.xaml.cs">
 	    <DependentUpon>NuevoClientePage.xaml</DependentUpon>
 	  </Compile>

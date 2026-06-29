@@ -115,9 +115,16 @@ namespace EstudioContableApp.ViewModels
                 }
                 else
                 {
+                    ClienteSeleccionado.Nombre = NuevoNombre;
+                    ClienteSeleccionado.Email = NuevoEmail;
+
                     var index = Clientes.IndexOf(ClienteSeleccionado);
+
                     if (index >= 0)
-                        Clientes[index] = cliente;
+                    {
+                        Clientes.RemoveAt(index);
+                        Clientes.Insert(index, ClienteSeleccionado);
+                    }
                 }
                 NuevoNombre = string.Empty;
                 NuevoEmail = string.Empty;
@@ -186,6 +193,8 @@ namespace EstudioContableApp.ViewModels
             if (cliente == null)
                 return;
 
+            ClienteSeleccionado = cliente;
+
             await Shell.Current.GoToAsync(
                 $"detalle?nombre={cliente.Nombre}&email={cliente.Email}&vencimiento={cliente.Vencimiento}");
         }
@@ -245,6 +254,20 @@ namespace EstudioContableApp.ViewModels
         {
             await Shell.Current.GoToAsync("nuevocliente");
         }
-    }
+        [RelayCommand]
+        private async Task EditarCliente(Cliente cliente)
+        {
+            if (cliente == null)
+                return;
 
+            ClienteSeleccionado = cliente;
+
+            NuevoNombre = cliente.Nombre;
+            NuevoEmail = cliente.Email;
+
+            cliente.EsEdicion = true;
+
+            await Shell.Current.GoToAsync("nuevocliente");
+        }
     }
+}

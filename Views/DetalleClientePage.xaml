@@ -264,7 +264,7 @@
 
                 <Button
                     Grid.Column="0"
-                    Text="← Volver"
+                    Text="Volver"
                     HeightRequest="42"
                     CornerRadius="12"
                     BackgroundColor="#6B7280"
@@ -274,7 +274,7 @@
                 <Button
                     Grid.Column="1"
                     Text="Editar"
-                    HeightRequest="42"
+                    HeightRequest="48"
                     CornerRadius="12"
                     BackgroundColor="#2563EB"
                     TextColor="White"

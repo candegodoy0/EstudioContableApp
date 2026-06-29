@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="EstudioContableApp.Views.EditarClientePage"
+    BackgroundColor="#181C24"
+    Title="Editar Cliente">
+
+    <Grid Padding="20">
+
+        <Border
+            MaximumWidthRequest="500"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            BackgroundColor="#242B38"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 20"
+            Padding="25">
+
+            <VerticalStackLayout Spacing="15">
+
+                <Label
+                    Text="Editar Cliente"
+                    FontSize="26"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalOptions="Center"/>
+
+                <Entry
+                    Placeholder="Nombre"
+                    Text="{Binding NuevoNombre}"
+                    BackgroundColor="#323B4A"
+                    TextColor="White"
+                    PlaceholderColor="#8A95A8"
+                    HeightRequest="45"/>
+
+                <Entry
+                    Placeholder="Email"
+                    Keyboard="Email"
+                    Text="{Binding NuevoEmail}"
+                    BackgroundColor="#323B4A"
+                    TextColor="White"
+                    PlaceholderColor="#8A95A8"
+                    HeightRequest="45"/>
+
+                <Button
+                    Text="Guardar cambios"
+                    BackgroundColor="#1976D2"
+                    TextColor="White"
+                    HeightRequest="45"
+                    CornerRadius="12"
+                    Clicked="OnGuardarClicked"/>
+
+                <Button
+                    Text="Cancelar"
+                    BackgroundColor="#6B7280"
+                    TextColor="White"
+                    HeightRequest="45"
+                    CornerRadius="12"
+                    Clicked="OnCancelarClicked"/>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+    </Grid>
+
+</ContentPage>
