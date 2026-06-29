@@ -7,7 +7,7 @@
 
     <Grid
         Padding="20"
-        RowDefinitions="Auto,Auto,Auto,Auto,*" 
+        RowDefinitions="Auto,Auto,Auto,*" 
         RowSpacing="18">
 
         <!-- titulo de la app -->
@@ -76,79 +76,26 @@
 
                 </VerticalStackLayout>
 
-                <Border
+                <Button
                     Grid.Column="1"
                     WidthRequest="60"
                     HeightRequest="60"
+                    CornerRadius="30"
                     BackgroundColor="#1976D2"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 30">
-
-                    <Label
-                        Text="+"
-                        FontSize="34"
-                        TextColor="White"
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"/>
-
-                </Border>
+                    Text="+"
+                    FontSize="30"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    Command="{Binding IrANuevoClienteCommand}" />
 
             </Grid>
-
-        </Border>
-
-        <!-- formulario para agregar cliente manualmente -->
-
-        <Border
-            Grid.Row="2"
-            BackgroundColor="#242B38"
-            StrokeThickness="0"
-            StrokeShape="RoundRectangle 20"
-            Padding="18">
-
-            <VerticalStackLayout
-                Spacing="12">
-
-                <Label
-                    Text="Nuevo Cliente"
-                    FontSize="19"
-                    FontAttributes="Bold"
-                    TextColor="White"/>
-
-                <Entry
-                    Placeholder="Nombre del cliente"
-                    PlaceholderColor="#8A95A8"
-                    BackgroundColor="#323B4A"
-                    TextColor="White"
-                    HeightRequest="50"
-                    Text="{Binding NuevoNombre}" />
-
-                <Entry
-                    Placeholder="Email del cliente"
-                    PlaceholderColor="#8A95A8"
-                    BackgroundColor="#323B4A"
-                    TextColor="White"
-                    HeightRequest="50"
-                    Keyboard="Email"
-                    Text="{Binding NuevoEmail}" />
-
-                <Button
-                    Text="Guardar cliente"
-                    HeightRequest="48"
-                    CornerRadius="14"
-                    FontAttributes="Bold"
-                    BackgroundColor="#2E88FF"
-                    TextColor="White"
-                    Command="{Binding GuardarClienteCommand}" />
-
-            </VerticalStackLayout>
 
         </Border>
 
         <!-- buscador -->
 
         <Border
-            Grid.Row="3"
+            Grid.Row="2"
             BackgroundColor="#242B38"
             StrokeThickness="0"
             StrokeShape="RoundRectangle 20"
@@ -208,106 +155,104 @@
 
         </Border>
 
-        <VerticalStackLayout
-            Grid.Row="4"
-            Spacing="12">
+        <Grid Grid.Row="3">
 
             <!-- lista de clientes -->
 
             <CollectionView
-                ItemsSource="{Binding Clientes}"
-                SelectionMode="Single"
-                SelectedItem="{Binding ClienteSeleccionado}">
+        ItemsSource="{Binding Clientes}"
+        SelectionMode="Single"
+        SelectedItem="{Binding ClienteSeleccionado}">
 
                 <CollectionView.ItemTemplate>
 
                     <DataTemplate>
 
                         <Border
-                            Margin="0,0,0,15"
-                            Padding="18"
-                            BackgroundColor="#242B38"
-                            Stroke="#353D4C"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 20">
+                    Margin="0,0,0,15"
+                    Padding="18"
+                    BackgroundColor="#242B38"
+                    Stroke="#353D4C"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 20">
 
                             <Grid
-                                ColumnDefinitions="65,*"
-                                RowDefinitions="Auto,Auto,Auto,Auto">
+                        ColumnDefinitions="65,*"
+                        RowDefinitions="Auto,Auto,Auto">
 
                                 <!-- avatar -->
 
                                 <Border
-                                    WidthRequest="56"
-                                    HeightRequest="56"
-                                    BackgroundColor="#1976D2"
-                                    StrokeThickness="0"
-                                    StrokeShape="RoundRectangle 28"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Start">
+                            WidthRequest="56"
+                            HeightRequest="56"
+                            BackgroundColor="#1976D2"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 28"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Start">
 
                                     <Label
-                                        Text="{Binding Iniciales}"
-                                        FontSize="22"
-                                        FontAttributes="Bold"
-                                        TextColor="White"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="Center"/>
+                                Text="{Binding Iniciales}"
+                                FontSize="22"
+                                FontAttributes="Bold"
+                                TextColor="White"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"/>
 
                                 </Border>
 
                                 <!-- nombre -->
 
                                 <VerticalStackLayout
-                                    Grid.Column="1"
-                                    Spacing="2">
+                            Grid.Column="1"
+                            Spacing="2">
 
                                     <Label
-                                        Text="{Binding Nombre}"
-                                        FontSize="19"
-                                        FontAttributes="Bold"
-                                        TextColor="White"/>
+                                Text="{Binding Nombre}"
+                                FontSize="19"
+                                FontAttributes="Bold"
+                                TextColor="White"/>
 
                                     <Label
-                                        Text="{Binding Email}"
-                                        FontSize="13"
-                                        TextColor="#C9D0DB"/>
+                                Text="{Binding Email}"
+                                FontSize="13"
+                                TextColor="#C9D0DB"/>
 
                                 </VerticalStackLayout>
 
                                 <!-- estado -->
 
                                 <HorizontalStackLayout
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    Margin="0,12,0,0"
-                                    Spacing="8">
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="0,12,0,0"
+                            Spacing="8">
 
                                     <Border
-                                        BackgroundColor="#234E34"
-                                        StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 10"
-                                        Padding="10,4">
+                                BackgroundColor="#234E34"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10,4">
 
                                         <Label
-                                            Text="ACTIVO"
-                                            FontSize="10"
-                                            FontAttributes="Bold"
-                                            TextColor="#7CFFAE"/>
+                                    Text="ACTIVO"
+                                    FontSize="10"
+                                    FontAttributes="Bold"
+                                    TextColor="#7CFFAE"/>
 
                                     </Border>
 
                                     <Border
-                                        BackgroundColor="#5A2E2E"
-                                        StrokeThickness="0"
-                                        StrokeShape="RoundRectangle 10"
-                                        Padding="10,4">
+                                BackgroundColor="#5A2E2E"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10"
+                                Padding="10,4">
 
                                         <Label
-                                            Text="{Binding Vencimiento}"
-                                            FontSize="10"
-                                            FontAttributes="Bold"
-                                            TextColor="#FFB4B4"/>
+                                    Text="{Binding Vencimiento}"
+                                    FontSize="10"
+                                    FontAttributes="Bold"
+                                    TextColor="#FFB4B4"/>
 
                                     </Border>
 
@@ -316,33 +261,33 @@
                                 <!-- botones -->
 
                                 <Grid
-                                    Grid.Row="2"
-                                    Grid.ColumnSpan="2"
-                                    Margin="0,18,0,0"
-                                    ColumnDefinitions="*,*"
-                                    ColumnSpacing="10">
+                            Grid.Row="2"
+                            Grid.ColumnSpan="2"
+                            Margin="0,18,0,0"
+                            ColumnDefinitions="*,*"
+                            ColumnSpacing="10">
 
                                     <Button
-                                        Grid.Column="0"
-                                        HeightRequest="42"
-                                        CornerRadius="12"
-                                        BackgroundColor="#1976D2"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        Text="Ver detalle"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VerDetalleClienteCommand}"
-                                        CommandParameter="{Binding .}" />
+                                Grid.Column="0"
+                                HeightRequest="42"
+                                CornerRadius="12"
+                                BackgroundColor="#1976D2"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                Text="Ver detalle"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.VerDetalleClienteCommand}"
+                                CommandParameter="{Binding .}" />
 
                                     <Button
-                                        Grid.Column="1"
-                                        HeightRequest="42"
-                                        CornerRadius="12"
-                                        BackgroundColor="#D32F2F"
-                                        TextColor="White"
-                                        FontAttributes="Bold"
-                                        Text="Eliminar"
-                                        Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarClienteCommand}"
-                                        CommandParameter="{Binding .}" />
+                                Grid.Column="1"
+                                HeightRequest="42"
+                                CornerRadius="12"
+                                BackgroundColor="#D32F2F"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                Text="Eliminar"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.EliminarClienteCommand}"
+                                CommandParameter="{Binding .}" />
 
                                 </Grid>
 
@@ -355,9 +300,9 @@
                 </CollectionView.ItemTemplate>
 
             </CollectionView>
-
-        </VerticalStackLayout>
+        </Grid>
 
     </Grid>
 
 </ContentPage>
+    
