@@ -8,11 +8,20 @@
 
     <ScrollView>
 
-        <VerticalStackLayout
-            Padding="25"
-            Spacing="25">
+        <Grid
+        Padding="25">
 
-            <!-- encabezado -->
+            <Border
+            MaximumWidthRequest="520"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            BackgroundColor="Transparent"
+            StrokeThickness="0">
+
+                <VerticalStackLayout
+                Spacing="25">
+
+                    <!-- encabezado -->
 
             <VerticalStackLayout
                 HorizontalOptions="Center"
@@ -122,7 +131,11 @@
 
             </Border>
 
-        </VerticalStackLayout>
+                </VerticalStackLayout>
+
+            </Border>
+
+        </Grid>
 
     </ScrollView>
 

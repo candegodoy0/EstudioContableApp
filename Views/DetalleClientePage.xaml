@@ -9,7 +9,7 @@
     <ScrollView>
 
         <VerticalStackLayout
-            Padding="20"
+            Padding="25"
             Spacing="18">
 
             <!-- encabezado -->
@@ -74,6 +74,8 @@
             <!-- datos -->
 
             <Border
+                MaximumWidthRequest="650"
+                HorizontalOptions="Center"
                 BackgroundColor="White"
                 Stroke="#E5E7EB"
                 StrokeThickness="1"
@@ -160,7 +162,7 @@
 
                         <Button
                             Grid.Column="0"
-                            Text="📷 Cámara"
+                            Text="Cámara"
                             HeightRequest="45"
                             CornerRadius="12"
                             BackgroundColor="#2563EB"
@@ -169,7 +171,7 @@
 
                         <Button
                             Grid.Column="1"
-                            Text="🖼 Galería"
+                            Text="Galería"
                             HeightRequest="45"
                             CornerRadius="12"
                             BackgroundColor="#10B981"
@@ -179,7 +181,7 @@
                     </Grid>
 
                     <Border
-                        HeightRequest="230"
+                        HeightRequest="180"
                         BackgroundColor="#F3F4F6"
                         Stroke="#D1D5DB"
                         StrokeShape="RoundRectangle 14">
@@ -212,7 +214,7 @@
                         TextColor="#111827"/>
 
                     <Button
-                        Text="📍 Obtener ubicación actual"
+                        Text="Obtener ubicación actual"
                         HeightRequest="45"
                         CornerRadius="12"
                         BackgroundColor="#F59E0B"
@@ -263,7 +265,7 @@
                 <Button
                     Grid.Column="0"
                     Text="← Volver"
-                    HeightRequest="48"
+                    HeightRequest="42"
                     CornerRadius="12"
                     BackgroundColor="#6B7280"
                     TextColor="White"
@@ -271,11 +273,12 @@
 
                 <Button
                     Grid.Column="1"
-                    Text="✏ Editar"
-                    HeightRequest="48"
+                    Text="Editar"
+                    HeightRequest="42"
                     CornerRadius="12"
                     BackgroundColor="#2563EB"
-                    TextColor="White"/>
+                    TextColor="White"
+                    Clicked="OnEditarClicked"/>
 
             </Grid>
 
