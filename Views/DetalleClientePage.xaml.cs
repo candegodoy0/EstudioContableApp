@@ -17,6 +17,12 @@ public partial class DetalleClientePage : ContentPage
 
     private async void OnEditarClicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("editarcliente");
+        if (BindingContext is DetalleClienteViewModel vm)
+        {
+            await Shell.Current.GoToAsync(
+                $"editarcliente?id={vm.Id}" +
+                $"&nombre={Uri.EscapeDataString(vm.Nombre)}" +
+                $"&email={Uri.EscapeDataString(vm.Email)}");
+        }
     }
 }

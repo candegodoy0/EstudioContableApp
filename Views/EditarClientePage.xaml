@@ -28,7 +28,7 @@
 
                 <Entry
                     Placeholder="Nombre"
-                    Text="{Binding NuevoNombre}"
+                    Text="{Binding Nombre}"
                     BackgroundColor="#323B4A"
                     TextColor="White"
                     PlaceholderColor="#8A95A8"
@@ -37,7 +37,7 @@
                 <Entry
                     Placeholder="Email"
                     Keyboard="Email"
-                    Text="{Binding NuevoEmail}"
+                    Text="{Binding Email}"
                     BackgroundColor="#323B4A"
                     TextColor="White"
                     PlaceholderColor="#8A95A8"

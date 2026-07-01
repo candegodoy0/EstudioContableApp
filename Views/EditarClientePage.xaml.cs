@@ -4,17 +4,10 @@ namespace EstudioContableApp.Views;
 
 public partial class EditarClientePage : ContentPage
 {
-    public EditarClientePage(ClientesViewModel vm)
+    public EditarClientePage(EditarClienteViewModel vm)
     {
         InitializeComponent();
-
         BindingContext = vm;
-
-        if (vm.ClienteSeleccionado != null)
-        {
-            vm.NuevoNombre = vm.ClienteSeleccionado.Nombre;
-            vm.NuevoEmail = vm.ClienteSeleccionado.Email;
-        }
     }
 
     private async void OnCancelarClicked(object sender, EventArgs e)
@@ -24,11 +17,9 @@ public partial class EditarClientePage : ContentPage
 
     private async void OnGuardarClicked(object sender, EventArgs e)
     {
-        if (BindingContext is ClientesViewModel vm)
+        if (BindingContext is EditarClienteViewModel vm)
         {
-            await vm.GuardarClienteCommand.ExecuteAsync(null);
+            await vm.GuardarCommand.ExecuteAsync(null);
         }
-
-        await Shell.Current.GoToAsync("..");
     }
 }

@@ -10,8 +10,12 @@
         /// </summary>
         public static bool NombreValido(string nombre)
         {
-            return !string.IsNullOrWhiteSpace(nombre);
+            if (string.IsNullOrWhiteSpace(nombre))
+                return false;
+
+            return nombre.All(c => char.IsLetter(c) || char.IsWhiteSpace(c));
         }
+
         /// <summary>
         /// Verifica que el email tenga un formato básico válido.
         /// </summary>

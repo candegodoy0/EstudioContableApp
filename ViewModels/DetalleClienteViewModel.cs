@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace EstudioContableApp.ViewModels
 {
+    [QueryProperty("Id", "id")]
     [QueryProperty("Nombre", "nombre")]
     [QueryProperty("Email", "email")]
     [QueryProperty("Vencimiento", "vencimiento")]
@@ -12,6 +13,9 @@ namespace EstudioContableApp.ViewModels
     {
         [ObservableProperty]
         private string nombre = string.Empty;
+
+        [ObservableProperty]
+        private int id;
 
         public string Iniciales
         {

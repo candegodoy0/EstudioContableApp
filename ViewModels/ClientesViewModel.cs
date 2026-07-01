@@ -193,10 +193,11 @@ namespace EstudioContableApp.ViewModels
             if (cliente == null)
                 return;
 
-            ClienteSeleccionado = cliente;
-
             await Shell.Current.GoToAsync(
-                $"detalle?nombre={cliente.Nombre}&email={cliente.Email}&vencimiento={cliente.Vencimiento}");
+                $"detalle?id={cliente.Id}" +
+                $"&nombre={Uri.EscapeDataString(cliente.Nombre)}" +
+                $"&email={Uri.EscapeDataString(cliente.Email)}" +
+                $"&vencimiento={Uri.EscapeDataString(cliente.Vencimiento)}");
         }
 
         [RelayCommand]

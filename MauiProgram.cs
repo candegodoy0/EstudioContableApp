@@ -34,6 +34,7 @@ namespace EstudioContableApp
             builder.Services.AddTransient<ClientesViewModel>();
             builder.Services.AddTransient<DetalleClienteViewModel>();
             builder.Services.AddTransient<NuevoClienteViewModel>();
+            builder.Services.AddTransient<EditarClienteViewModel>();
 
             // vistas
             builder.Services.AddTransient<ClientesPage>();
