@@ -58,6 +58,10 @@ public partial class EditarClienteViewModel : ObservableObject
 
         await _repository.GuardarClienteAsync(cliente);
 
-        await Shell.Current.GoToAsync("..");
+        await Shell.Current.GoToAsync(
+            $"..?id={cliente.Id}" +
+            $"&nombre={Uri.EscapeDataString(cliente.Nombre)}" +
+            $"&email={Uri.EscapeDataString(cliente.Email)}" +
+            $"&vencimiento={Uri.EscapeDataString(cliente.Vencimiento)}");
     }
 }
