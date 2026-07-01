@@ -28,20 +28,24 @@ namespace EstudioContableApp.Repositories
         /// </summary>
         public async Task<List<Cliente>> ObtenerClientesAsync()
         {
+            // primero veo si ya existen clientes en la base local
+            var clientesLocales = await _database.ObtenerClientesAsync();
+
+            if (clientesLocales.Any())
+                return clientesLocales;
+
             try
             {
-                // obtengo clientes desde la API
-                var clientes = await _service.ObtenerClientesAsync();
+                // si la base esta vacia, los descargo desde la API
+                var clientesApi = await _service.ObtenerClientesAsync();
 
-                // los guardo localmente
-                await _database.GuardarClientesAsync(clientes);
+                await _database.GuardarClientesAsync(clientesApi);
 
                 return await _database.ObtenerClientesAsync();
             }
             catch
             {
-                // si falla internet, uso los datos locales
-                return await _database.ObtenerClientesAsync();
+                return clientesLocales;
             }
         }
         /// <summary>

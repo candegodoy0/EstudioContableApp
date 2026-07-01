@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="EstudioContableApp.csproj" />
-  <Project Path="EstudioContableApp.Tests/EstudioContableApp.Tests.csproj" />
+  <Project Path="EstudioContableApp.Tests/EstudioContableApp.Tests.csproj">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
 </Solution>
